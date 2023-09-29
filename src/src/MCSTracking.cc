@@ -1005,6 +1005,7 @@ void MCSTracking::print_database_dl()
     int nof_unknown = 0;
     int num = 1;
 
+    std::cout << "Hello World" << std::endl;
     for (int i = 0; i < 104; i++)
     {
         std::cout << "-";
