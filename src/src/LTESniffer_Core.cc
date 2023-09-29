@@ -390,7 +390,10 @@ bool LTESniffer_Core::run(){
             } else if (n == SRSRAN_UE_MIB_FOUND) {
               srsran_pbch_mib_unpack(bch_payload, &cell, &sfn);
               srsran_cell_fprint(stdout, &cell, sfn);
+              // NEED TO STOP AFTER THIS POINT!
               printf("Decoded MIB. SFN: %d, offset: %d\n", sfn, sfn_offset);
+              go_exit = true;
+              break;
               sfn   = (sfn + sfn_offset) % 1024;
               state = DECODE_PDSCH;
 
@@ -450,6 +453,11 @@ bool LTESniffer_Core::run(){
             skip_last_1s++;
           }
           break;
+      }
+
+      if(go_exit) {
+        std::cout << "We found something idk" << std::endl;
+        break;
       }
 
       /*increase system frame number*/
